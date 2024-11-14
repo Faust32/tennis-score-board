@@ -1,4 +1,4 @@
 package dto;
 
-public record RoundWinnerDTO(Long playerId, GameScore gameScore) {
+public record RoundWinnerDTO(Long playerId, MatchScoreDTO matchScoreDTO) {
 }

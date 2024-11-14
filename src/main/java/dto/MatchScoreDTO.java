@@ -1,4 +1,8 @@
 package dto;
 
-public record MatchScoreDTO(Long firstPlayerId, Long secondPlayerId, GameScore gameScore) {
+import score.GameScore;
+import score.SetScore;
+import score.TiebreakScore;
+
+public record MatchScoreDTO(GameScore gameScore, SetScore setScore, TiebreakScore tiebreakScore) {
 }

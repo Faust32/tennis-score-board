@@ -1,6 +1,6 @@
 package utils;
 
-import dto.GameScore;
+import score.GameScore;
 import lombok.experimental.UtilityClass;
 import model.Match;
 import model.Player;
