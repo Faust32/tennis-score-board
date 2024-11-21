@@ -1,6 +1,6 @@
 package dao;
 
-import score.GameScore;
+import model.score.GameScore;
 import jakarta.persistence.EntityManager;
 
 public class ScoreRepository extends RepositoryBase<Long, GameScore> {

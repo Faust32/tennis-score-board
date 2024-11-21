@@ -1,4 +1,4 @@
-package score;
+package model.score;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,8 @@
 package dto;
 
-import score.GameScore;
-import score.SetScore;
-import score.TiebreakScore;
+import model.score.GameScore;
+import model.score.SetScore;
+import model.score.TiebreakScore;
 
 public record MatchScoreDTO(GameScore gameScore, SetScore setScore, TiebreakScore tiebreakScore) {
 }

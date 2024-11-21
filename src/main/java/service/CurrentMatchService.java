@@ -1,17 +1,16 @@
 package service;
 
 import exceptions.NotFoundModelException;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import model.Match;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public class CurrentMatchService {
-    private final List<Match> matchesList;
-    @Getter
-    private static Long currentMatchId;
+    private final List<Match> matchesList; //TODO: think about is it really worth it to have this list?
+    private static UUID currentMatchId;
 
     public void addMatch(Match match) {
         matchesList.add(match);
@@ -24,7 +23,4 @@ public class CurrentMatchService {
                 .orElseThrow(() -> new NotFoundModelException("There is no such match!"));
     }
 
-    public void deleteCurrentMatch() {
-        matchesList.removeIf(match -> match.getId().equals(currentMatchId));
-    }
 }

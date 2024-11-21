@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2E7D32;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+.button-container {
+    gap: 20px;
+}
+
+.gradient-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #34D399, #059669);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gradient-button:hover {
+    background: linear-gradient(45deg, #059669, #34D399);
+    border-color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.gradient-button:active {
+    transform: scale(0.95);
+}

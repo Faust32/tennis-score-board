@@ -12,10 +12,9 @@ import utils.ParametersValidity;
 public class NewMatchController {
     private final NewMatchService newMatchService;
     private final CurrentMatchService currentMatchService;
-
     public void handle(HttpServletRequest request) {
-        String firstPlayerName = request.getParameter("firstPlayerName");
-        String secondPlayerName = request.getParameter("secondPlayerName");
+        String firstPlayerName = request.getParameter("first_player_name");
+        String secondPlayerName = request.getParameter("second_player_name");
         PlayersDTO playersDTO = new PlayersDTO(firstPlayerName, secondPlayerName);
         ParametersValidity.validateNames(playersDTO);
         newMatchService.savePlayers(playersDTO);

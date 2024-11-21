@@ -1,9 +1,10 @@
-package score;
+package model.score;
 
 import model.Match;
 
+import java.util.Optional;
+
 public class ScoreController {
-    //TODO: think about returning values
 
     public boolean isTie(SetScore setScore) {
         return setScore.getFirstPlayerScore() == 6 && setScore.getSecondPlayerScore() == 6;
@@ -17,13 +18,23 @@ public class ScoreController {
         return gameScore.getFirstPlayerScore() == 40 || gameScore.getSecondPlayerScore() == 40;
     }
 
-    //TODO: make this method
-    public Long handeTie(TiebreakScore tiebreakScore, Match match, Long winnerId) {
+    public Optional<Long> handeTie(TiebreakScore tiebreakScore, Match match, Long winnerId) {
+        Long player1Id = match.getPlayer1().getId();
+        Long player2Id = match.getPlayer2().getId();
+        if (player1Id.equals(winnerId)) {
+            tiebreakScore.updateFirstPlayerScore(1);
+        } else {
+            tiebreakScore.updateSecondPlayerScore(1);
+        }
         Integer firstPlayerScore = tiebreakScore.getFirstPlayerScore();
         Integer secondPlayerScore = tiebreakScore.getSecondPlayerScore();
         if (firstPlayerScore >= 7 && firstPlayerScore - secondPlayerScore >= 2) {
-            return match.getPlayer1().getId();
+            return Optional.of(player1Id);
         }
+        if (secondPlayerScore >= 7 && secondPlayerScore - firstPlayerScore >= 2) {
+            return Optional.of(player2Id);
+        }
+        return Optional.empty();
     }
 
     public void handleDeuce(GameScore gameScore, SetScore setScore, Long player1Id, Long winnerId) {
@@ -34,14 +45,25 @@ public class ScoreController {
         }
     }
 
-    public void handleFortyScore(GameScore gameScore, SetScore setScore, Long player1Id, Long winnerId) {
+    public Optional<Long> handleFortyScore(GameScore gameScore, SetScore setScore, Match match, Long winnerId) {
+        Long player1Id = match.getPlayer1().getId();
+        Long player2Id = match.getPlayer2().getId();
         if (gameScore.getFirstPlayerScore() == 40 && player1Id.equals(winnerId)) {
             setScore.updateFirstPlayerScore(1);
+            if ((gameScore.getFirstPlayerScore() >= 6) &&
+                    ((gameScore.getFirstPlayerScore() - gameScore.getSecondPlayerScore()) >= 2)) {
+                return Optional.of(player1Id);
+            }
         } else if (gameScore.getSecondPlayerScore() == 40 && !player1Id.equals(winnerId)) {
             setScore.updateSecondPlayerScore(1);
+            if ((gameScore.getSecondPlayerScore() >= 6) &&
+                    ((gameScore.getSecondPlayerScore() - gameScore.getFirstPlayerScore()) >= 2)) {
+                return Optional.of(player2Id);
+            }
         } else {
             incrementPlayerScore(gameScore, player1Id.equals(winnerId));
         }
+        return Optional.empty();
     }
 
     private void setAdvantage(GameScore gameScore, boolean isFirstPlayer) {

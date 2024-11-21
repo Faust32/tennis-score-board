@@ -1,6 +1,7 @@
 package utils;
 
-import score.GameScore;
+import lombok.Getter;
+import model.score.GameScore;
 import lombok.experimental.UtilityClass;
 import model.Match;
 import model.Player;
@@ -10,13 +11,16 @@ import org.hibernate.cfg.Configuration;
 
 @UtilityClass
 public class HibernateUtil {
-    public SessionFactory buildSessionFactory() {
+    @Getter
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    private SessionFactory buildSessionFactory() {
         Configuration configuration = buildConfiguration();
         configuration.configure();
         return configuration.buildSessionFactory();
     }
 
-    public Configuration buildConfiguration() {
+    private Configuration buildConfiguration() {
         Configuration configuration = new Configuration();
         configuration.setProperty("hibernate.connection.url", "db.url");
         configuration.setProperty("hibernate.connection.username", "db.username");
@@ -29,4 +33,5 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(GameScore.class);
         return configuration;
     }
+
 }
