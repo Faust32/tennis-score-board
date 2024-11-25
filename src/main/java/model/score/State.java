@@ -1,0 +1,12 @@
+package model.score;
+
+public enum State {
+    NOTHING,
+    TIEBREAK,
+    FIRST_PLAYER_WON_GAME,
+    SECOND_PLAYER_WON_GAME,
+    FIRST_PLAYER_WON_SET,
+    SECOND_PLAYER_WON_SET,
+    FIRST_PLAYER_WON_MATCH,
+    SECOND_PLAYER_WON_MATCH
+}

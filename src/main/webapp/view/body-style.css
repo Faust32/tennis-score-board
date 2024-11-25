@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #353453;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+.header {
+    text-align: center;
+    font-size: 46px;
+    margin: 0;
+    padding: 10px 0;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto
+}
+img {
+    margin: 10px;
+    border-radius: 5%;
+    border: 5px solid #A5D1C5;
+}
+h2 {text-align: center;
+    font-size: 24px
+}
+

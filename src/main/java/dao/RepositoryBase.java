@@ -7,6 +7,7 @@ import utils.HibernateUtil;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public abstract class RepositoryBase<K extends Serializable, E> implements Repository<K, E> {

@@ -13,7 +13,9 @@ import java.util.regex.Pattern;
 
 @UtilityClass
 public class ParametersValidity {
-    private static final Pattern NAME_PATTERN = Pattern.compile("^(?!.* {2})([a-zA-Z-]+(?: [a-zA-Z-]+){0,2})$\n");
+    private static final int MIN_NAME_LENGTH = 3;
+    private static final int MAX_NAME_LENGTH = 30;
+    private static final Pattern NAME_PATTERN = Pattern.compile("^(?!.* {2})([a-zA-Z-']+(?: [a-zA-Z-']+){0,2})$\n");
     private static final Set<String> BAD_WORDS = new HashSet<>();
 
     static {
@@ -38,7 +40,8 @@ public class ParametersValidity {
     }
 
     private void validateName(String name) {
-        if (name == null || name.isEmpty() || !NAME_PATTERN.matcher(name).matches()) {
+        if (name == null || name.isEmpty() || !NAME_PATTERN.matcher(name).matches()
+                || name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
             throw new InvalidParameterException("Invalid name: " + name);
         }
         if (containsBadWords(name)) {
