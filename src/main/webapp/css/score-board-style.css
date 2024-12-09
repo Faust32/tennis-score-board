@@ -1,0 +1,114 @@
+.square {
+    border: 3px solid black;
+    border-radius: 50px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+    height: 300px;
+    width: 800px;
+}
+
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 47px;
+    width: 100%;
+    height: 100%;
+}
+
+.top-row, .bottom-row {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 50%;
+}
+
+.top-row {
+    border-bottom: 2px solid darkblue;
+}
+
+.bottom-row {
+    border-top: 2px solid darkblue;
+}
+
+.player-name, .match-score, .set-score, .game-score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: bold;
+    vertical-align: center;
+    text-align: center;
+    overflow: hidden;
+    font-family: "Arial Black", Gadget, sans-serif;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.player-name {
+    width: 55%;
+    background-color: #4682B4;
+    padding: 10px;
+    word-wrap: break-word;
+}
+
+button.match-score, button.set-score, button.game-score {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    font-family: "Arial Black", Gadget, sans-serif;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.match-score, .set-score, .game-score {
+    user-select: none;
+}
+
+form {
+    user-select: none;
+    display: inline-block;
+    height: 100%;
+    width: 17%;
+}
+
+button.match-score, button.set-score, button.game-score {
+    user-select: none !important;
+    pointer-events: all;
+}
+
+.match-score {
+    background-color: #AFEEEE !important;
+}
+
+.set-score {
+    background-color: #40E0D0 !important;
+}
+
+.game-score {
+    background-color: #00CED1 !important;
+    width: 19%;
+}
+
+.top-row .player-name {
+    border-radius: 46px 0 0 0;
+}
+
+.top-row .game-score {
+    border-radius: 0 46px 0 0;
+}
+
+.bottom-row .player-name {
+    border-radius: 0 0 0 46px;
+}
+
+.bottom-row .game-score {
+    border-radius: 0 0 46px 0;
+}

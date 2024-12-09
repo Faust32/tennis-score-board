@@ -1,6 +1,7 @@
 package servlets;
 
-
+import controller.MatchesController;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,15 +12,18 @@ import java.io.IOException;
 
 @WebServlet("/matches")
 public class MatchesServlet extends HttpServlet {
+    private MatchesController matchesController;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    public void init() {
+        ServletContext servletContext = getServletContext();
+        matchesController = (MatchesController) servletContext.getAttribute("matchesController");
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        matchesController.handle(request);
+        getServletContext().getRequestDispatcher("/all-matches.jsp").forward(request, response);
     }
 
 }

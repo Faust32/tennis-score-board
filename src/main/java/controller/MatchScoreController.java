@@ -1,37 +1,44 @@
 package controller;
 
 import dao.PlayerRepository;
+import dto.MatchScoreDTO;
+
 import model.Match;
 import model.Player;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 import service.CurrentMatchService;
-import service.FinishedMatchesHandlerService;
 import service.MatchScoreHandlerService;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 public class MatchScoreController {
-    private final MatchScoreHandlerService matchScoreHandlerService;
-    private final CurrentMatchService currentMatchService;
-    private final FinishedMatchesHandlerService finishedMatchesHandlerService;
-    private final PlayerRepository playerRepository;
+    private final MatchScoreHandlerService matchScoreHandlerService = new MatchScoreHandlerService();
+    private final CurrentMatchService currentMatchService = CurrentMatchService.getInstance();
+    private final PlayerRepository playerRepository  = new PlayerRepository();
 
     public void handle(HttpServletRequest request) {
+        matchScoreHandlerService.setGame(currentMatchService.getGame());
         Long playerId = Long.valueOf(request.getParameter("round_winner"));
-        Match match = currentMatchService.getCurrentMatch();
-        Long result = 0L;
+        Match match = currentMatchService.getCurrentMatch().match();
+        boolean someoneWon = false;
         if (match.getPlayer1().getId().equals(playerId)) {
-            result = matchScoreHandlerService.updateScore(1L);
+            someoneWon = matchScoreHandlerService.updateScore(1L);
         }
         if (match.getPlayer2().getId().equals(playerId)) {
-            result = matchScoreHandlerService.updateScore(2L);
+            someoneWon = matchScoreHandlerService.updateScore(2L);
         }
-        if (result != 0L) {
+        if (someoneWon) {
             Optional<Player> winner = playerRepository.findById(playerId);
             winner.ifPresent(match::setWinner);
-            finishedMatchesHandlerService.saveMatch();
+            currentMatchService.updateMatch(match);
         }
+        setAttributes(request);
+    }
+
+    public void setAttributes(HttpServletRequest request) {
+        matchScoreHandlerService.setGame(currentMatchService.getGame());
+        MatchScoreDTO matchScoreDTO = currentMatchService.getCurrentMatch();
+        matchScoreDTO.playersScoreDTO().setScore(matchScoreHandlerService.getScore());
+        request.setAttribute("matchScore", matchScoreDTO);
     }
 }

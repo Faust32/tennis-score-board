@@ -1,56 +1,34 @@
 package model.score;
 
-import lombok.Getter;
+import static model.score.Game.player1;
+import static model.score.Game.player2;
 
-@Getter
-public class GameScore extends Game {
-
-    private void resetScore() {
-        points.replace(player1, 0);
-        points.replace(player2, 0);
-    }
-
+public class GameScore implements StateUpdater {
     @Override
-    public void updateState() {
-        int player1Score = points.get(player1);
-        int player2Score = points.get(player2);
-        if (state.equals(State.NOTHING)) {
-            if (player1Score > 3 && player1Score - player2Score >= 2) {
-                state = State.FIRST_PLAYER_WON_GAME;
-                resetScore();
-            } else if (player2Score > 3 && player2Score - player1Score >= 2) {
-                state = State.SECOND_PLAYER_WON_GAME;
-                resetScore();
+    public void updateState(Game game) {
+        int player1Score = game.gamePoints.get(player1);
+        int player2Score = game.gamePoints.get(player2);
+        if (Game.state.equals(State.NOTHING)) {
+            if (player1Score >= 4 && player1Score - player2Score >= 2) {
+                Game.state = State.FIRST_PLAYER_WON_GAME;
+                resetScore(game);
+            } else if (player2Score >= 4 && player2Score - player1Score >= 2) {
+                Game.state = State.SECOND_PLAYER_WON_GAME;
+                resetScore(game);
             }
             if (player1Score == 4 && player2Score == 4) {
-                rollbackPlayersPoint();
+                rollbackPlayersPoint(game);
             }
         }
     }
 
-    private void rollbackPlayersPoint() {
-        points.replace(player1, 3);
-        points.replace(player2, 3);
+    private void resetScore(Game game) {
+        game.gamePoints.replace(player1, 0);
+        game.gamePoints.replace(player2, 0);
     }
 
-    private enum Point {
-        NONE("0"),
-        FIFTEEN("15"),
-        THIRTY("30"),
-        FOURTY("40"),
-        ADVANTAGE("AD");
-
-        Point(String number) {
-        }
-
-        static Point getNextValue(Point currentPoint) {
-            Point[] values = Point.values();
-            int index = currentPoint.ordinal() + 1;
-            if (index >= values.length) {
-                index = 0;
-            }
-            return values[index];
-        }
-
+    private void rollbackPlayersPoint(Game game) {
+        game.gamePoints.replace(player1, 3);
+        game.gamePoints.replace(player2, 3);
     }
 }

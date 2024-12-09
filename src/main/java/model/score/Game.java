@@ -3,30 +3,39 @@ package model.score;
 import lombok.Getter;
 
 import java.util.HashMap;
+import java.util.List;
 
-public abstract class Game {
-    //TODO: make a method that converts current score to String type for match/set/game scores.
+public class Game {
     @Getter
-    protected State state;
+    protected static State state;
     protected static Integer player1 = 1;
     protected static Integer player2 = 2;
-    protected final HashMap<Integer, Integer> points;
+    protected final HashMap<Integer, Integer> matchPoints;
+    protected final HashMap<Integer, Integer> setPoints;
+    protected final HashMap<Integer, Integer> gamePoints;
+
+    @Getter
+    protected final Score score;
+
+    private final List<StateUpdater> stateUpdaters;
 
     public Game() {
-        points = new HashMap<>();
         state = State.NOTHING;
-        points.put(player1, 0);
-        points.put(player2, 0);
+        score = new Score();
+        matchPoints = score.getMatchPoints();
+        setPoints = score.getSetPoints();
+        gamePoints = score.getGamePoints();
+        stateUpdaters = List.of(new GameScore(), new SetScore(), new MatchScore(), new TiebreakScore());
     }
 
-    public abstract void updateState();
-
     public void addPoint(Integer toPlayer) {
-        points.put(toPlayer, points.get(toPlayer) + 1);
+        gamePoints.put(toPlayer, gamePoints.get(toPlayer) + 1);
         updateState();
     }
 
-    public String getPlayersPoints(Integer player) {
-        return points.get(player).toString();
+    private void updateState() {
+        for (StateUpdater stateUpdater : stateUpdaters) {
+            stateUpdater.updateState(this);
+        }
     }
 }

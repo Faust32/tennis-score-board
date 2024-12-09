@@ -1,16 +1,14 @@
 import lombok.RequiredArgsConstructor;
-import model.score.Game;
-import model.score.GameScore;
-import model.score.State;
+import model.score.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 @RequiredArgsConstructor
 public class GameScoreTest {
-    Game game;
+    Game game = new Game();
     @Test
     void testPointEnrollment() {
-        game = new GameScore();
         game.addPoint(1);
         game.addPoint(1);
         game.addPoint(1);
@@ -21,16 +19,39 @@ public class GameScoreTest {
 
         game.addPoint(1);
         game.addPoint(2);
-        Assertions.assertEquals("3", game.getPlayersPoints(1));
+        Assertions.assertEquals("40", game.getScore().getPlayerGamePoints(1));
     }
 
     @Test
     void testScoreEnrollment() {
-        game = new GameScore();
         game.addPoint(1);
         game.addPoint(1);
         game.addPoint(1);
         game.addPoint(1);
-        Assertions.assertEquals(State.FIRST_PLAYER_WON_GAME, game.getState());
+        Assertions.assertEquals(1, game.getScore().getSetPoints().get(1));
     }
+
+    @Test
+    void testTiebreak() {
+        for (int i = 0; i < 20; i++) {
+            game.addPoint(1);
+        }
+        for (int i = 0; i < 20; i++) {
+            game.addPoint(2);
+        }
+        game.addPoint(1);
+        game.addPoint(1);
+        game.addPoint(1);
+        game.addPoint(1);
+
+        game.addPoint(2);
+        game.addPoint(2);
+        game.addPoint(2);
+        game.addPoint(2);
+
+        game.addPoint(2);
+        game.addPoint(2);
+        Assertions.assertEquals(2, game.getScore().getGamePoints().get(2));
+    }
+
 }

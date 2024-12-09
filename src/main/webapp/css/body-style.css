@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #DEFACE;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0 auto;
+}
+.header {
+    text-align: center;
+    font-size: 46px;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto
+}
+img {
+    margin-bottom: 18px;
+    border-radius: 5%;
+    border: 5px solid #A5D1C5;
+}
+h2 {
+    text-align: center;
+    font-size: 24px
+}
+
+.search-bar {
+    --padding: 14px;
+    width: 50% !important;
+    display: flex;
+    align-items: center;
+    padding: var(--padding);
+    border-radius: 30px;
+    background-color: #f6f6f6;
+    transition: box-shadow 0.25s;
+}
+
+.search-bar:focus-within {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+    background: #f2f8fb;
+}
+
+.search-bar-input {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #333333;
+    margin-left: var(--padding);
+    outline: none;
+    border: none;
+    background: transparent;
+    flex: 1;
+    width: 80%;
+}
+
+.search-bar-input::placeholder,
+.search-icon {
+    color: rgba(0, 0, 0, 0.5)
+}
+
+.search-bar {
+    user-select: none;
+    padding: var(--padding);
+}
+
+.pagination {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background: linear-gradient(45deg, #34D399, #059669);
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #d0dfde;
+    border-radius: 5px;
+}
+.center-pagination {
+    text-align: center;
+}
+
+form {
+    margin-bottom: 10px;
+}
+
+table {
+    margin-top: 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #555;
+    color: white;
+}

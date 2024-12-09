@@ -7,15 +7,20 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@ToString
+@ToString   
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "players", indexes = {@Index(name = "player_name", columnList = "name")})
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String name;
 
 }
+
+
+
+
