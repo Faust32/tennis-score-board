@@ -71,7 +71,7 @@ public class ParametersValidity {
             throw new InvalidParametersException("Name must be between " + MIN_NAME_LENGTH + " and " + MAX_NAME_LENGTH
                     + " characters long.");
         }
-        if (NAME_PATTERN.matcher(name).matches()) {
+        if (!NAME_PATTERN.matcher(name).matches()) {
             throw new InvalidParametersException("The name must contain only latin letters, contain from one to three " +
                     "words consisting of letters, hyphens (-) or apostrophes ('), without double spaces.");
         }
