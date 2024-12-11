@@ -10,6 +10,7 @@ Tennis Score Board is a small client-server application with a web interface tha
 * Hibernate
 * H2
 * JUnit
+* HTML/CSS
 * Docker
 
 ## Requests
