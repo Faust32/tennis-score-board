@@ -14,7 +14,9 @@ import java.util.UUID;
 
 @WebServlet("/match-score")
 public class MatchScoreServlet extends HttpServlet {
+
     private NewMatchController newMatchController;
+
     private MatchScoreController matchScoreController;
 
     @Override

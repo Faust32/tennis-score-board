@@ -1,7 +1,7 @@
 package service;
 
-import dao.MatchRepository;
-import dao.PlayerRepository;
+import repository.MatchRepository;
+import repository.PlayerRepository;
 import dto.PlayersDTO;
 import jakarta.transaction.Transactional;
 import model.Match;
@@ -11,7 +11,9 @@ import java.util.List;
 
 @Transactional
 public class NewMatchService {
+
     private final PlayerRepository playerRepository = new PlayerRepository();
+
     private final MatchRepository matchRepository = new MatchRepository();
 
     public Player[] savePlayers(PlayersDTO playersDTO) {

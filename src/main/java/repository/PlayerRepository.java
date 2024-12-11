@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import exceptions.HibernateException;
 import model.Player;
@@ -9,7 +9,9 @@ import utils.HibernateUtil;
 import java.util.List;
 
 public class PlayerRepository extends RepositoryBase<Long, Player> {
+
     private static final Class<Player> clazz = Player.class;
+
     public PlayerRepository() {
         super(clazz);
     }

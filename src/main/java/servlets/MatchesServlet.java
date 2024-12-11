@@ -12,6 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/matches")
 public class MatchesServlet extends HttpServlet {
+
     private MatchesController matchesController;
 
     @Override

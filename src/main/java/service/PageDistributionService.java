@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PageDistributionService {
+
     public static final int NUMBER_OF_MATCHES_IN_PAGE = 8;
+
     public MatchesListDTO getMatchesOnPage(MatchesListDTO matchesList) {
         List<Match> matches = matchesList.matches();
         Long pageNumber = matchesList.matchPageDTO().getPageNumber();

@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet {
+
     private NewMatchController newMatchController;
 
     @Override

@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import exceptions.HibernateException;
 import model.Match;
@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class MatchRepository extends RepositoryBase<UUID, Match> {
+
     public MatchRepository() {
         super(Match.class);
     }

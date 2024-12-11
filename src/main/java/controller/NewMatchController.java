@@ -12,8 +12,11 @@ import utils.ParametersValidity;
 import java.util.UUID;
 
 public class NewMatchController {
+
     private final NewMatchService newMatchService = new NewMatchService();
+
     private final CurrentMatchService currentMatchService = CurrentMatchService.getInstance();
+
     public void handle(HttpServletRequest request) {
         String firstPlayerName = request.getParameter("first_player_name");
         String secondPlayerName = request.getParameter("second_player_name");

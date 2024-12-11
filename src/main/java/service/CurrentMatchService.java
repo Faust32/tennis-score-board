@@ -1,6 +1,6 @@
 package service;
 
-import dao.MatchRepository;
+import repository.MatchRepository;
 import dto.MatchScoreDTO;
 import dto.PlayersScoreDTO;
 import exceptions.NotFoundException;
@@ -15,9 +15,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CurrentMatchService {
     @Getter
     private Game game;
+
     private static CurrentMatchService instance;
+
     private static UUID currentMatchId;
+
     private final Map<UUID, MatchScoreDTO> currentMatches = new ConcurrentHashMap<>();
+
     private final MatchRepository matchRepository = new MatchRepository();
 
     private CurrentMatchService() {}

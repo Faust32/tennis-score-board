@@ -4,6 +4,7 @@ import static model.score.Game.player1;
 import static model.score.Game.player2;
 
 public class TiebreakScore implements StateUpdater {
+
     @Override
     public void updateState(Game game) {
         if (Game.state.equals(State.TIEBREAK)) {

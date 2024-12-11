@@ -11,8 +11,11 @@ import utils.ParametersValidity;
 import java.util.List;
 
 public class MatchesController {
+
     private final PageDistributionService pageDistributionService = new PageDistributionService();
+
     private final MatchesByNameService matchesByNameService = new MatchesByNameService();
+
     public void handle(HttpServletRequest request) {
         Long pageNumber = ParametersValidity.validatePageNumber(request.getParameter("page"));
         String playerName = request.getParameter("filter_by_player_name");

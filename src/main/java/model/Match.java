@@ -27,7 +27,7 @@ public class Match {
     private Player player2;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "winner", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "winner", referencedColumnName = "id")
     private Player winner;
 
 }

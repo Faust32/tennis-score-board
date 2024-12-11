@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import exceptions.HibernateException;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public abstract class RepositoryBase<K extends Serializable, E> implements Repository<K, E> {
+
     private final Class<E> clazz;
 
     @Override
@@ -22,9 +23,7 @@ public abstract class RepositoryBase<K extends Serializable, E> implements Repos
             session.persist(entity);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            transaction.rollback();
             throw new HibernateException("An error occurred while trying to save this entity: " + entity.toString());
         }
     }

@@ -15,9 +15,13 @@ import java.util.regex.Pattern;
 
 @UtilityClass
 public class ParametersValidity {
+
     private static final int MIN_NAME_LENGTH = 3;
+
     private static final int MAX_NAME_LENGTH = 30;
+
     private static final Pattern NAME_PATTERN = Pattern.compile("^(?!.* {2})([a-zA-Z-']+(?: [a-zA-Z-']+){0,2})$");
+
     private static final Set<String> BAD_WORDS = new HashSet<>();
 
     static {
@@ -38,6 +42,17 @@ public class ParametersValidity {
         }
     }
 
+    public Long validatePageNumber(String parameter) {
+        if (parameter == null || parameter.isEmpty()) {
+            return 1L;
+        }
+        long pageNumber = Long.parseLong(parameter);
+        if (pageNumber <= 0) {
+            return 1L;
+        }
+        return pageNumber;
+    }
+
     public void validateNames(PlayersDTO playersDTO) {
         String firstPlayerName = playersDTO.firstPlayerName();
         String secondPlayerName = playersDTO.secondPlayerName();
@@ -49,9 +64,16 @@ public class ParametersValidity {
     }
 
     private void validateName(String name) {
-        if (name == null || name.isEmpty() || !NAME_PATTERN.matcher(name).matches()
-                || name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
-            throw new InvalidParametersException("Invalid name: " + name);
+        if (name == null || name.isEmpty()) {
+            throw new InvalidParametersException("Name cannot be null or empty.");
+        }
+        if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
+            throw new InvalidParametersException("Name must be between " + MIN_NAME_LENGTH + " and " + MAX_NAME_LENGTH
+                    + " characters long.");
+        }
+        if (NAME_PATTERN.matcher(name).matches()) {
+            throw new InvalidParametersException("The name must contain only latin letters, contain from one to three " +
+                    "words consisting of letters, hyphens (-) or apostrophes ('), without double spaces.");
         }
         if (containsBadWords(name)) {
             throw new InvalidParametersException("Name contains prohibited words: " + name);
@@ -66,17 +88,6 @@ public class ParametersValidity {
             }
         }
         return false;
-    }
-
-    public Long validatePageNumber(String parameter) {
-        if (parameter == null || parameter.isEmpty()) {
-            return 1L;
-        }
-        long pageNumber = Long.parseLong(parameter);
-        if (pageNumber <= 0) {
-            return 1L;
-        }
-        return pageNumber;
     }
 
 }

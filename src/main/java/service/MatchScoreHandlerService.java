@@ -7,7 +7,9 @@ import model.score.State;
 
 @Setter
 public class MatchScoreHandlerService {
+
     private Game game;
+
     public boolean updateScore(Long playerId) {
         game.addPoint(playerId.intValue());
         State state = Game.getState();

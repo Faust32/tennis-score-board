@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 
 @UtilityClass
 public class HibernateUtil {
+
     @Getter
     private static final SessionFactory sessionFactory = buildSessionFactory();
 

@@ -4,6 +4,7 @@ import static model.score.Game.player1;
 import static model.score.Game.player2;
 
 public class SetScore implements StateUpdater {
+
     @Override
     public void updateState(Game game) {
         int player1Score = game.setPoints.get(player1);

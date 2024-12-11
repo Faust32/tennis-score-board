@@ -9,8 +9,11 @@ import java.util.HashMap;
 public class Score {
     @Setter
     private State state = Game.state;
+
     private final HashMap<Integer, Integer> matchPoints;
+
     private final HashMap<Integer, Integer> setPoints;
+
     private final HashMap<Integer, Integer> gamePoints;
 
     public Score() {

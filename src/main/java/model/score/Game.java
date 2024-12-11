@@ -8,10 +8,15 @@ import java.util.List;
 public class Game {
     @Getter
     protected static State state;
+
     protected static Integer player1 = 1;
+
     protected static Integer player2 = 2;
+
     protected final HashMap<Integer, Integer> matchPoints;
+
     protected final HashMap<Integer, Integer> setPoints;
+
     protected final HashMap<Integer, Integer> gamePoints;
 
     @Getter
@@ -25,7 +30,7 @@ public class Game {
         matchPoints = score.getMatchPoints();
         setPoints = score.getSetPoints();
         gamePoints = score.getGamePoints();
-        stateUpdaters = List.of(new GameScore(), new SetScore(), new MatchScore(), new TiebreakScore());
+        stateUpdaters = List.of(new GameScore(), new SetScore(),  new TiebreakScore(), new MatchScore());
     }
 
     public void addPoint(Integer toPlayer) {

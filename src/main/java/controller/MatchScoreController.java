@@ -1,6 +1,6 @@
 package controller;
 
-import dao.PlayerRepository;
+import repository.PlayerRepository;
 import dto.MatchScoreDTO;
 
 import model.Match;
@@ -12,8 +12,11 @@ import service.MatchScoreHandlerService;
 import java.util.Optional;
 
 public class MatchScoreController {
+
     private final MatchScoreHandlerService matchScoreHandlerService = new MatchScoreHandlerService();
+
     private final CurrentMatchService currentMatchService = CurrentMatchService.getInstance();
+
     private final PlayerRepository playerRepository  = new PlayerRepository();
 
     public void handle(HttpServletRequest request) {
